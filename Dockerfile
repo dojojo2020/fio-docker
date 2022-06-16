@@ -6,4 +6,4 @@ COPY jobs /jobs
 VOLUME /data
 WORKDIR /data
 
-ENTRYPOINT [ "fio" ]
+#ENTRYPOINT [ "fio" ]
