@@ -6,7 +6,7 @@ invalidate=1
 runtime=120
 size=10g
 
-[rand-read]
+[seq-read]
 bs=16k
 rw=read
 stonewall
