@@ -1,0 +1,20 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: fio-randwrite-job-config
+data:
+  randwrite-job.fio: |-
+    [global]
+    ioengine=libaio
+    iodepth=64
+    direct=1
+    invalidate=1
+    runtime=120
+    numjobs=4
+    size=1g
+    [randread]
+    bs=64k
+    rw=randwrite
+    time_based
+    group_reporting
+    stonewall
