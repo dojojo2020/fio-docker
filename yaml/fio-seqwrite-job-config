@@ -1,0 +1,20 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: fio-seqwrite-job-config
+data:
+  seqwrite-job.fio: |-
+    [global]
+    ioengine=libaio
+    iodepth=64
+    direct=1
+    invalidate=1
+    runtime=120
+    numjobs=4
+    size=1g
+    [seq-write]
+    bs=64k
+    rw=read
+    time_based
+    group_reporting
+    stonewall
