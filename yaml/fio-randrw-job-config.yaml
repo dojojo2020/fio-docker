@@ -1,0 +1,21 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: fio-randrw-job-config
+data:
+  randrw-job.fio: |-
+    [global]
+    ioengine=libaio
+    iodepth=64
+    direct=1
+    invalidate=1
+    runtime=120
+    numjobs=4
+    size=500GB
+    [randrw]
+    bs=64k
+    rw=randrw
+    time_based
+    group_reporting
+    eta-newline=1
+    stonewall
