@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: fio9
+  labels:
+    app: fio
+spec:
+  containers:
+  - name: fio9
+    image:  image-registry.openshift-image-registry.svc:5000/benchmark/fio-docker:latest
+    args: ["/jobs/randread-job.fio"]
+    volumeMounts:
+    - name: fio-config-vol
+      mountPath: /jobs/randread-job.fio
+      subPath: randread-job.fio
+    - name: fio-data
+      mountPath: /data
+    imagePullPolicy: Always
+  restartPolicy: Never
+  volumes:
+  - name: fio-config-vol
+    configMap:
+      name: fio-randread-job-config 
+  - name: fio-data
+    persistentVolumeClaim:
+     claimName: fio-container-pvc1
