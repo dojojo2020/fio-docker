@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: fio8
+  labels:
+    app: fio
+spec:
+  containers:
+  - name: fio8
+    image:  image-registry.openshift-image-registry.svc:5000/benchmark/fio-docker:latest
+    #command: ["sh"]
+    #args: ["-c", "echo ${HOSTNAME} && mkdir -p /data/${HOSTNAME} && fio /jobs/seq-read.fio --directory=/data/${HOSTNAME} && exit"]
+    args: ["/jobs/seqread-job.fio"]
+    volumeMounts:
+    - name: fio-config-vol
+      mountPath: /jobs/seqread-job.fio
+      subPath: seqread-job.fio
+    - name: fio-data
+      mountPath: /data
+    imagePullPolicy: Always
+  restartPolicy: Never
+  volumes:
+  - name: fio-config-vol
+    configMap:
+      name: fio-seqread-job-config 
+  - name: fio-data
+    persistentVolumeClaim:
+     claimName: fio-container-pvc1
