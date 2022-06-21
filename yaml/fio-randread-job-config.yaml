@@ -6,14 +6,14 @@ data:
   randread-job.fio: |-
     [global]
     ioengine=libaio
-    iodepth=64
+    iodepth=512
     direct=1
     invalidate=1
     runtime=120
     numjobs=4
     size=1g
     [randread]
-    bs=64k
+    bs=4k
     rw=randread
     time_based
     group_reporting
